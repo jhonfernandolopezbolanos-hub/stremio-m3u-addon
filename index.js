@@ -4,10 +4,8 @@ const axios = require('axios')
 const app = express()
 const PORT = process.env.PORT || 7000
 
-//  M3U privada
 const M3U_URL = 'https://goldtv.lat:8080/get.php?username=PeterVilla&password=Guayaquil2025&type=m3u_plus'
 
-// Manifest del addon
 app.get('/manifest.json', (req, res) => {
   res.json({
     id: 'org.m3u.private.addon',
@@ -21,7 +19,6 @@ app.get('/manifest.json', (req, res) => {
   })
 })
 
-// Streams
 app.get('/stream/:type/:id.json', async (req, res) => {
   try {
     const response = await axios.get(M3U_URL, { timeout: 15000 })
@@ -50,5 +47,5 @@ app.get('/stream/:type/:id.json', async (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(Addon running on port ${PORT})
+  console.log('Addon running on port ' + PORT)
 })
